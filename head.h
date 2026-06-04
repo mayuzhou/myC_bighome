@@ -13,7 +13,7 @@ struct PET_CAT{
     int age;
     float weight;
     float temp;
-    float litterScore;
+    float paiyi;
     int vaccineYear[3];
     int vaccineMonth[3];
     int vaccineDay[3];
@@ -37,13 +37,13 @@ struct PET_DOG{
 struct CAT_BREED{
     char name[50];
     float weight;
-    float coeff;
+    float canshu;
 };
 
 struct DOG_BREED{
     char name[50];
     float weight;
-    float coeff;
+    float canshu;
 };
 void vetMenu();
 void mainMenu();
@@ -56,8 +56,10 @@ void viewCats();
 void addDog();
 void viewDogs();
 
-void catHealthCalc(struct PET_CAT *cat);
-void dogHealthCalc(struct PET_DOG *dog);
+int pipei(char*a,char*b);
+void cathealth(struct PET_CAT*cat);
+void doghealth(struct PET_DOG*dog);
+void viewLowHealth();
 void manageCatBreeds();
 
 void manageDogBreeds();

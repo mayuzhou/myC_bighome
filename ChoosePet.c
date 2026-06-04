@@ -2,9 +2,9 @@
 
 // 选择猫或狗系统
 void mainMenu(int choice){
-    if(choice == 1){
+    if(choice==1){
         catSystem();
-    }else if(choice == 2){
+    }else if(choice==2){
         dogSystem();
     }else{
         printf("无效选择！\n");
@@ -21,7 +21,7 @@ void catSystem(){
         printf("3.品种管理\n");
         printf("0.返回\n");
         printf("选择: ");
-        scanf("%d", &choice);
+        scanf("%d",&choice);
         
         switch(choice){
             case 1:
@@ -51,7 +51,7 @@ void dogSystem(){
         printf("3.品种管理\n");
         printf("0.返回\n");
         printf("选择: ");
-        scanf("%d", &choice);
+        scanf("%d",&choice);
         
         switch(choice){
             case 1:
