@@ -1,6 +1,7 @@
 #include"head.h"
 
-void vetMenu(){
+void vetMenu(struct CAT_BREED catBreeds[], int *catBreedCount,
+             struct DOG_BREED dogBreeds[], int *dogBreedCount){
     int choice;
     
     while(1){
@@ -17,8 +18,7 @@ void vetMenu(){
     scanf("%d",&choice);
 
     switch(choice){
-        case 1:
-        case 2:{  // 共用宠物类型选择逻辑
+        case 1:{
             int type;
             printf("\n请选择宠物类型:\n");
             printf("1. 猫\n");
@@ -26,9 +26,22 @@ void vetMenu(){
             printf("选择: ");
             scanf("%d",&type);
             if(type==1)
-                catSystem();
+                addCat(catBreeds, catBreedCount);
             else if(type==2)
-                dogSystem();
+                addDog(dogBreeds, dogBreedCount);
+            break;
+        }
+        case 2:{
+            int type;
+            printf("\n请选择宠物类型:\n");
+            printf("1. 猫\n");
+            printf("2. 狗\n");
+            printf("选择: ");
+            scanf("%d",&type);
+            if(type==1)
+                catSystem(catBreeds, catBreedCount);
+            else if(type==2)
+                dogSystem(dogBreeds, dogBreedCount);
             break;
         }
         case 3:{
@@ -36,9 +49,9 @@ void vetMenu(){
             printf("\n1.猫品种  2.狗品种  0.返回: ");
             scanf("%d",&type);
             if(type==1)
-                manageCatBreeds();
+                manageCatBreeds(catBreeds, catBreedCount);
             else if(type==2)
-                manageDogBreeds();
+                manageDogBreeds(dogBreeds, dogBreedCount);
             break;
         }
         case 4:

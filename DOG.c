@@ -1,6 +1,6 @@
 #include"head.h"
 
-void saveDogBreeds(){
+void saveDogBreeds(struct DOG_BREED dogBreeds[], int dogBreedCount){
     FILE*fp=fopen("data/dog_breeds.dat","wb");
     if(fp==NULL){
         system("mkdir data 2>nul");
@@ -11,15 +11,15 @@ void saveDogBreeds(){
     fclose(fp);
 }
 
-void loadDogBreeds(){
+void loadDogBreeds(struct DOG_BREED dogBreeds[], int *dogBreedCount){
     FILE*fp=fopen("data/dog_breeds.dat","rb");
     if(fp==NULL)return;
-    fread(&dogBreedCount,sizeof(int),1,fp);
-    fread(dogBreeds,sizeof(struct DOG_BREED),dogBreedCount,fp);
+    fread(dogBreedCount,sizeof(int),1,fp);
+    fread(dogBreeds,sizeof(struct DOG_BREED),*dogBreedCount,fp);
     fclose(fp);
 }
 
-void addDog(){
+void addDog(struct DOG_BREED dogBreeds[], int *dogBreedCount){
     struct PET_DOG dog;
     
     printf("\n========== 添加狗信息 ==========\n");
@@ -27,24 +27,24 @@ void addDog(){
     scanf("%s",dog.name);
     
     printf("\n品种列表:\n");
-    for(int i=0;i<dogBreedCount;i++){
+    for(int i=0;i<*dogBreedCount;i++){
         printf("%d.%s ",i+1,dogBreeds[i].name);
     }
-    printf("%d.添加新品种\n",dogBreedCount+1);
+    printf("%d.添加新品种\n",*dogBreedCount+1);
     printf("选择: ");
     int ch;
     scanf("%d",&ch);
     
-    if(ch==dogBreedCount+1){
+    if(ch==*dogBreedCount+1){
         printf("新品种名称: ");
-        scanf("%s",dogBreeds[dogBreedCount].name);
+        scanf("%s",dogBreeds[*dogBreedCount].name);
         printf("标准体重(kg): ");
-        scanf("%f",&dogBreeds[dogBreedCount].weight);
+        scanf("%f",&dogBreeds[*dogBreedCount].weight);
         printf("修正系数: ");
-        scanf("%f",&dogBreeds[dogBreedCount].canshu);
-        dogBreedCount++;
-        strcpy(dog.variety,dogBreeds[dogBreedCount-1].name);
-        saveDogBreeds();
+        scanf("%f",&dogBreeds[*dogBreedCount].canshu);
+        (*dogBreedCount)++;
+        strcpy(dog.variety,dogBreeds[*dogBreedCount-1].name);
+        saveDogBreeds(dogBreeds, *dogBreedCount);
     }else{
         strcpy(dog.variety,dogBreeds[ch-1].name);
     }
@@ -78,7 +78,7 @@ void addDog(){
     }
     
     // 后台健康评估计算
-    doghealth(&dog);
+    doghealth(&dog, dogBreeds, *dogBreedCount);
     
     // 保存到文件（二进制追加）
     FILE*fp=fopen("data/dogs.dat","ab");
@@ -131,13 +131,13 @@ void viewDogs(){
     if(count==0)printf("\n暂无狗信息！\n");
 }
 
-void manageDogBreeds(){
+void manageDogBreeds(struct DOG_BREED dogBreeds[], int *dogBreedCount){
     int choice;
     while(1){
         printf("\n========== 狗品种管理 ==========\n");
-        printf("当前品种数: %d\n\n",dogBreedCount);
+        printf("当前品种数: %d\n\n",*dogBreedCount);
         printf("品种列表:\n");
-        for(int i=0;i<dogBreedCount;i++){
+        for(int i=0;i<*dogBreedCount;i++){
             printf("%2d. %-8s 标准体重: %4.1fkg 系数: %.2f\n",
                    i+1,dogBreeds[i].name,dogBreeds[i].weight,dogBreeds[i].canshu);
         }
@@ -146,13 +146,13 @@ void manageDogBreeds(){
         
         if(choice==1){
             printf("品种名称: ");
-            scanf("%s",dogBreeds[dogBreedCount].name);
+            scanf("%s",dogBreeds[*dogBreedCount].name);
             printf("标准体重(kg): ");
-            scanf("%f",&dogBreeds[dogBreedCount].weight);
+            scanf("%f",&dogBreeds[*dogBreedCount].weight);
             printf("修正系数: ");
-            scanf("%f",&dogBreeds[dogBreedCount].canshu);
-            dogBreedCount++;
-            saveDogBreeds();
+            scanf("%f",&dogBreeds[*dogBreedCount].canshu);
+            (*dogBreedCount)++;
+            saveDogBreeds(dogBreeds, *dogBreedCount);
             printf("添加成功！\n");
         }else if(choice==0){
             break;

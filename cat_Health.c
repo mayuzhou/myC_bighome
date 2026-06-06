@@ -1,20 +1,5 @@
 #include"head.h"
 
-// 猫品种数组初始化
-struct CAT_BREED catBreeds[20]={
-    {"布偶",5.0,1.0},
-    {"英短",5.0,1.0},
-    {"美短",4.5,1.0},
-    {"暹罗",4.0,1.0},
-    {"波斯",4.5,1.0},
-    {"加菲",4.5,1.0},
-    {"狸花",4.0,1.1},
-    {"橘猫",5.0,1.1},
-    {"缅因",7.0,0.9},
-    {"无毛",4.0,0.95}
-};
-int catBreedCount=10;
-
 //技术亮点pipei函数
 int pipei(char*a,char*b){
     while(*a&&*b){
@@ -25,7 +10,7 @@ int pipei(char*a,char*b){
     return(*a==*b);
 }
 
-void cathealth(struct PET_CAT*cat){
+void cathealth(struct PET_CAT*cat, struct CAT_BREED catBreeds[], int catBreedCount){
     float biaozhunWeight=5.0,canshu=1.0;//先设默认值
     for(int i=0;i<catBreedCount;i++){
         if(pipei(cat->variety,catBreeds[i].name)){

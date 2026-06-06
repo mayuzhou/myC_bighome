@@ -1,6 +1,6 @@
 #include"head.h"
 
-void saveCatBreeds(){
+void saveCatBreeds(struct CAT_BREED catBreeds[], int catBreedCount){
     FILE*fp=fopen("data/cat_breeds.dat","wb");
     if(fp==NULL){
         system("mkdir data 2>nul");
@@ -11,15 +11,15 @@ void saveCatBreeds(){
     fclose(fp);
 }
 
-void loadCatBreeds(){
+void loadCatBreeds(struct CAT_BREED catBreeds[], int *catBreedCount){
     FILE*fp=fopen("data/cat_breeds.dat","rb");
     if(fp==NULL)return;
-    fread(&catBreedCount,sizeof(int),1,fp);
-    fread(catBreeds,sizeof(struct CAT_BREED),catBreedCount,fp);
+    fread(catBreedCount,sizeof(int),1,fp);
+    fread(catBreeds,sizeof(struct CAT_BREED),*catBreedCount,fp);
     fclose(fp);
 }
 
-void addCat(){
+void addCat(struct CAT_BREED catBreeds[], int *catBreedCount){
     struct PET_CAT cat;
     
     printf("\n========== 添加猫信息 ==========\n");
@@ -27,24 +27,24 @@ void addCat(){
     scanf("%s",cat.name);
     
     printf("\n品种列表:\n");
-    for(int i=0;i<catBreedCount;i++){
+    for(int i=0;i<*catBreedCount;i++){
         printf("%d.%s ",i+1,catBreeds[i].name);
     }
-    printf("%d.添加新品种\n",catBreedCount+1);
+    printf("%d.添加新品种\n",*catBreedCount+1);
     printf("选择: ");
     int ch;
     scanf("%d",&ch);
     
-    if(ch==catBreedCount+1){
+    if(ch==*catBreedCount+1){
         printf("新品种名称: ");
-        scanf("%s",catBreeds[catBreedCount].name);
+        scanf("%s",catBreeds[*catBreedCount].name);
         printf("标准体重(kg): ");
-        scanf("%f",&catBreeds[catBreedCount].weight);
+        scanf("%f",&catBreeds[*catBreedCount].weight);
         printf("修正系数: ");
-        scanf("%f",&catBreeds[catBreedCount].canshu);
-        catBreedCount++;
-        strcpy(cat.variety,catBreeds[catBreedCount-1].name);
-        saveCatBreeds();
+        scanf("%f",&catBreeds[*catBreedCount].canshu);
+        (*catBreedCount)++;
+        strcpy(cat.variety,catBreeds[*catBreedCount-1].name);
+        saveCatBreeds(catBreeds, *catBreedCount);
     }else{
         strcpy(cat.variety,catBreeds[ch-1].name);
     }
@@ -77,7 +77,7 @@ void addCat(){
         }
     }
     //评估 
-    cathealth(&cat);
+    cathealth(&cat, catBreeds, *catBreedCount);
     
     // 保存到文件（二进制追加）
     FILE*fp=fopen("data/cats.dat","ab");
@@ -130,13 +130,13 @@ void viewCats(){
     if(count==0)printf("\n暂无猫信息！\n");
 }
 
-void manageCatBreeds(){
+void manageCatBreeds(struct CAT_BREED catBreeds[], int *catBreedCount){
     int choice;
     while(1){
         printf("\n========== 猫品种管理 ==========\n");
-        printf("当前品种数: %d\n\n",catBreedCount);
+        printf("当前品种数: %d\n\n",*catBreedCount);
         printf("品种列表:\n");
-        for(int i=0;i<catBreedCount;i++){
+        for(int i=0;i<*catBreedCount;i++){
             printf("%2d. %-8s 标准体重: %4.1fkg 系数: %.2f\n",
                    i+1,catBreeds[i].name,catBreeds[i].weight,catBreeds[i].canshu);
         }
@@ -145,13 +145,13 @@ void manageCatBreeds(){
         
         if(choice==1){
             printf("品种名称: ");
-            scanf("%s",catBreeds[catBreedCount].name);
+            scanf("%s",catBreeds[*catBreedCount].name);
             printf("标准体重(kg): ");
-            scanf("%f",&catBreeds[catBreedCount].weight);
+            scanf("%f",&catBreeds[*catBreedCount].weight);
             printf("修正系数: ");
-            scanf("%f",&catBreeds[catBreedCount].canshu);
-            catBreedCount++;
-            saveCatBreeds();
+            scanf("%f",&catBreeds[*catBreedCount].canshu);
+            (*catBreedCount)++;
+            saveCatBreeds(catBreeds, *catBreedCount);
             printf("添加成功！\n");
         }else if(choice==0){
             break;

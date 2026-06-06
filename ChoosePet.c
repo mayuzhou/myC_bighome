@@ -1,18 +1,7 @@
 #include"head.h"
 
-// 选择猫或狗系统
-void mainMenu(int choice){
-    if(choice==1){
-        catSystem();
-    }else if(choice==2){
-        dogSystem();
-    }else{
-        printf("无效选择！\n");
-    }
-}
-
 // 猫子系统菜单
-void catSystem(){
+void catSystem(struct CAT_BREED catBreeds[], int *catBreedCount){
     int choice;
     while(1){
         printf("\n========== 猫子系统 ==========\n");
@@ -25,13 +14,13 @@ void catSystem(){
         
         switch(choice){
             case 1:
-                addCat();
+                addCat(catBreeds, catBreedCount);
                 break;
             case 2:
                 viewCats();
                 break;
             case 3:
-                manageCatBreeds();
+                manageCatBreeds(catBreeds, catBreedCount);
                 break;
             case 0:
                 return;
@@ -42,7 +31,7 @@ void catSystem(){
 }
 
 // 狗子系统菜单
-void dogSystem(){
+void dogSystem(struct DOG_BREED dogBreeds[], int *dogBreedCount){
     int choice;
     while(1){
         printf("\n========== 狗子系统 ==========\n");
@@ -55,13 +44,13 @@ void dogSystem(){
         
         switch(choice){
             case 1:
-                addDog();
+                addDog(dogBreeds, dogBreedCount);
                 break;
             case 2:
                 viewDogs();
                 break;
             case 3:
-                manageDogBreeds();
+                manageDogBreeds(dogBreeds, dogBreedCount);
                 break;
             case 0:
                 return;

@@ -1,21 +1,6 @@
 #include"head.h"
 
-// 狗品种数组初始化
-struct DOG_BREED dogBreeds[20]={
-    {"法斗",11.0,1.0},
-    {"金毛",28.0,0.9},
-    {"贵宾",5.0,1.1},
-    {"柯基",12.0,1.0},
-    {"拉布拉多",25.0,0.9},
-    {"哈士奇",22.0,0.95},
-    {"柴犬",9.0,1.0},
-    {"边牧",16.0,1.0},
-    {"比熊",5.5,1.1},
-    {"泰迪",4.5,1.1}
-};
-int dogBreedCount=10;
-
-void doghealth(struct PET_DOG*dog){
+void doghealth(struct PET_DOG*dog, struct DOG_BREED dogBreeds[], int dogBreedCount){
     float stdWeight=10.0,canshu=1.0;
     for(int i=0;i<dogBreedCount;i++){
         if(pipei(dog->variety,dogBreeds[i].name)){

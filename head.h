@@ -45,34 +45,28 @@ struct DOG_BREED{
     float weight;
     float canshu;
 };
-void vetMenu();
-void mainMenu();
-void catSystem();
-void dogSystem();
+void vetMenu(struct CAT_BREED catBreeds[], int *catBreedCount,
+             struct DOG_BREED dogBreeds[], int *dogBreedCount);
+void catSystem(struct CAT_BREED catBreeds[], int *catBreedCount);
+void dogSystem(struct DOG_BREED dogBreeds[], int *dogBreedCount);
 
-void addCat();
+void addCat(struct CAT_BREED catBreeds[], int *catBreedCount);
 
 void viewCats();
-void addDog();
+void addDog(struct DOG_BREED dogBreeds[], int *dogBreedCount);
 void viewDogs();
 
 int pipei(char*a,char*b);
-void cathealth(struct PET_CAT*cat);
-void doghealth(struct PET_DOG*dog);
+void cathealth(struct PET_CAT*cat, struct CAT_BREED catBreeds[], int catBreedCount);
+void doghealth(struct PET_DOG*dog, struct DOG_BREED dogBreeds[], int dogBreedCount);
 void viewLowHealth();
-void manageCatBreeds();
+void manageCatBreeds(struct CAT_BREED catBreeds[], int *catBreedCount);
 
-void manageDogBreeds();
+void manageDogBreeds(struct DOG_BREED dogBreeds[], int *dogBreedCount);
 
-void loadCatBreeds();
-void saveCatBreeds();
+void loadCatBreeds(struct CAT_BREED catBreeds[], int *catBreedCount);
+void saveCatBreeds(struct CAT_BREED catBreeds[], int catBreedCount);
 
-void loadDogBreeds();
-void saveDogBreeds();
-
-extern struct CAT_BREED catBreeds[20];
-extern int catBreedCount;
-
-extern struct DOG_BREED dogBreeds[20];
-extern int dogBreedCount;
+void loadDogBreeds(struct DOG_BREED dogBreeds[], int *dogBreedCount);
+void saveDogBreeds(struct DOG_BREED dogBreeds[], int dogBreedCount);
 #endif
