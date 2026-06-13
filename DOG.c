@@ -1,18 +1,15 @@
 #include"head.h"
 
 void saveDogBreeds(struct DOG_BREED dogBreeds[], int dogBreedCount){
-    FILE*fp=fopen("data/dog_breeds.dat","wb");
-    if(fp==NULL){
-        system("mkdir data 2>nul");
-        fp=fopen("data/dog_breeds.dat","wb");
-    }
+    FILE*fp=fopen("dog_breeds.dat","wb");
+    if(fp==NULL)return;
     fwrite(&dogBreedCount,sizeof(int),1,fp);
     fwrite(dogBreeds,sizeof(struct DOG_BREED),dogBreedCount,fp);
     fclose(fp);
 }
 
 void loadDogBreeds(struct DOG_BREED dogBreeds[], int *dogBreedCount){
-    FILE*fp=fopen("data/dog_breeds.dat","rb");
+    FILE*fp=fopen("dog_breeds.dat","rb");
     if(fp==NULL)return;
     fread(dogBreedCount,sizeof(int),1,fp);
     fread(dogBreeds,sizeof(struct DOG_BREED),*dogBreedCount,fp);
@@ -81,10 +78,10 @@ void addDog(struct DOG_BREED dogBreeds[], int *dogBreedCount){
     doghealth(&dog, dogBreeds, *dogBreedCount);
     
     // 保存到文件（二进制追加）
-    FILE*fp=fopen("data/dogs.dat","ab");
+    FILE*fp=fopen("dogs.dat","ab");
     if(fp==NULL){
-        system("mkdir data 2>nul");
-        fp=fopen("data/dogs.dat","ab");
+        printf("无法打开文件！\n");
+        return;
     }
     fwrite(&dog,sizeof(struct PET_DOG),1,fp);
     fclose(fp);
@@ -93,7 +90,7 @@ void addDog(struct DOG_BREED dogBreeds[], int *dogBreedCount){
 }
 
 void viewDogs(){
-    FILE*fp=fopen("data/dogs.dat","rb");
+    FILE*fp=fopen("dogs.dat","rb");
     if(fp==NULL){
         printf("\n暂无狗信息！\n");
         return;

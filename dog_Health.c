@@ -14,7 +14,7 @@ void doghealth(struct PET_DOG*dog, struct DOG_BREED dogBreeds[], int dogBreedCou
     
     float t;
     if(dog->temp>=37.5&&dog->temp<=38.5)t=1.0;
-    else if(dog->temp<=39.0)t=0.5;
+    else if(dog->temp>38.5&&dog->temp<=39.0)t=0.5;
     else t = 0;
     
     int yimiao = 0;

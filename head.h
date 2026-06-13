@@ -69,4 +69,9 @@ void saveCatBreeds(struct CAT_BREED catBreeds[], int catBreedCount);
 
 void loadDogBreeds(struct DOG_BREED dogBreeds[], int *dogBreedCount);
 void saveDogBreeds(struct DOG_BREED dogBreeds[], int dogBreedCount);
+
+void modifyCat(struct CAT_BREED catBreeds[], int catBreedCount);
+void modifyDog(struct DOG_BREED dogBreeds[], int dogBreedCount);
+void deleteCat();
+void deleteDog();
 #endif

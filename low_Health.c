@@ -5,7 +5,7 @@ void viewLowHealth(){
     printf("\n========== 健康预警(健康分<70) ==========\n");
 
     // 检查猫
-    FILE*fp=fopen("data/cats.dat","rb");
+    FILE*fp=fopen("cats.dat","rb");
     if(fp!=NULL){
         struct PET_CAT cat;
         while(fread(&cat,sizeof(struct PET_CAT),1,fp)==1){
@@ -19,7 +19,7 @@ void viewLowHealth(){
     }
 
     // 检查狗
-    fp=fopen("data/dogs.dat","rb");
+    fp=fopen("dogs.dat","rb");
     if(fp!=NULL){
         struct PET_DOG dog;
         while(fread(&dog,sizeof(struct PET_DOG),1,fp)==1){

@@ -7,7 +7,9 @@ void catSystem(struct CAT_BREED catBreeds[], int *catBreedCount){
         printf("\n========== 猫子系统 ==========\n");
         printf("1.添加猫信息\n");
         printf("2.查看猫信息\n");
-        printf("3.品种管理\n");
+        printf("3.修改猫信息\n");
+        printf("4.删除猫信息\n");
+        printf("5.品种管理\n");
         printf("0.返回\n");
         printf("选择: ");
         scanf("%d",&choice);
@@ -20,6 +22,12 @@ void catSystem(struct CAT_BREED catBreeds[], int *catBreedCount){
                 viewCats();
                 break;
             case 3:
+                modifyCat(catBreeds, *catBreedCount);
+                break;
+            case 4:
+                deleteCat();
+                break;
+            case 5:
                 manageCatBreeds(catBreeds, catBreedCount);
                 break;
             case 0:
@@ -37,7 +45,9 @@ void dogSystem(struct DOG_BREED dogBreeds[], int *dogBreedCount){
         printf("\n========== 狗子系统 ==========\n");
         printf("1.添加狗信息\n");
         printf("2.查看狗信息\n");
-        printf("3.品种管理\n");
+        printf("3.修改狗信息\n");
+        printf("4.删除狗信息\n");
+        printf("5.品种管理\n");
         printf("0.返回\n");
         printf("选择: ");
         scanf("%d",&choice);
@@ -50,6 +60,12 @@ void dogSystem(struct DOG_BREED dogBreeds[], int *dogBreedCount){
                 viewDogs();
                 break;
             case 3:
+                modifyDog(dogBreeds, *dogBreedCount);
+                break;
+            case 4:
+                deleteDog();
+                break;
+            case 5:
                 manageDogBreeds(dogBreeds, dogBreedCount);
                 break;
             case 0:

@@ -20,9 +20,10 @@ void cathealth(struct PET_CAT*cat, struct CAT_BREED catBreeds[], int catBreedCou
         }
     }
     float w=cat->weight/biaozhunWeight;
+    if(w>1.2)w=1.2;
     float t;
     if(cat->temp>=38.0&&cat->temp<=39.0)t=1.0;
-    else if(cat->temp<=39.5)t=0.5;
+    else if(cat->temp>39.0&&cat->temp<=39.5)t=0.5;
     else t = 0;
     
     int yimiao = 0;
